@@ -92,6 +92,151 @@
   items.forEach((el) => io.observe(el));
 })();
 
+/* ---- Toast ---- */
+function toast(msg) {
+  const t = document.getElementById('toast');
+  if (!t) return;
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(t._hide);
+  t._hide = setTimeout(() => t.classList.remove('show'), 2800);
+}
+
+/* ---- Add all events to calendar (.ics download) ---- */
+(function calendar() {
+  // Times in UTC (IST − 5:30)
+  const EVENTS = [
+    ['फूलों की हल्दी', '20260721T033000Z', '20260721T043000Z'],
+    ['बत्तीसी & मायरा', '20260721T043000Z', '20260721T063000Z'],
+    ['Reception', '20260721T063500Z', '20260721T093000Z'],
+    ['टीका-मिलनी', '20260721T113000Z', '20260721T123000Z'],
+    ['संगीत संध्या', '20260721T123000Z', '20260721T163000Z'],
+    ['बारात का स्वागत · पाणिग्रहण एवं शुभ फेरे', '20260722T043000Z', '20260722T083000Z'],
+  ];
+  const LOCATION = 'Jnanakshi Convention Hall\\, Hassan\\, Karnataka';
+
+  function buildICS() {
+    const lines = [
+      'BEGIN:VCALENDAR',
+      'VERSION:2.0',
+      'PRODID:-//Khushboo weds Lakhan//Wedding//EN',
+      'CALSCALE:GREGORIAN',
+      'METHOD:PUBLISH',
+    ];
+    EVENTS.forEach(([title, start, end], i) => {
+      lines.push(
+        'BEGIN:VEVENT',
+        `UID:event-${i + 1}@khushboo-weds-lakhan`,
+        'DTSTAMP:20260101T000000Z',
+        `DTSTART:${start}`,
+        `DTEND:${end}`,
+        `SUMMARY:${title} — Khushboo ♥ Lakhan`,
+        `LOCATION:${LOCATION}`,
+        'DESCRIPTION:Khushboo weds Lakhan — शुभ विवाह',
+        'END:VEVENT'
+      );
+    });
+    lines.push('END:VCALENDAR');
+    return lines.join('\r\n');
+  }
+
+  document.querySelectorAll('[data-add-cal]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const blob = new Blob([buildICS()], { type: 'text/calendar;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'Khushboo-Lakhan-Wedding.ics';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 4000);
+      toast('📅 कैलेंडर फ़ाइल डाउनलोड हुई — खोलकर सभी कार्यक्रम जोड़ें');
+    });
+  });
+})();
+
+/* ---- Share: copy link / WhatsApp / native ---- */
+(function share() {
+  const shareText = '💍 Khushboo ♥ Lakhan — शुभ विवाह\n21–22 July 2026 · Jnanakshi Convention Hall, Hassan\nनिमंत्रण देखें: ';
+
+  function copyLink() {
+    const url = location.href.split('#')[0];
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(url).then(
+        () => toast('🔗 Link copied! · लिंक कॉपी हो गया'),
+        () => fallbackCopy(url)
+      );
+    } else {
+      fallbackCopy(url);
+    }
+  }
+  function fallbackCopy(url) {
+    const ta = document.createElement('textarea');
+    ta.value = url;
+    document.body.appendChild(ta);
+    ta.select();
+    try {
+      document.execCommand('copy');
+      toast('🔗 Link copied! · लिंक कॉपी हो गया');
+    } catch (e) {
+      toast('कॉपी नहीं हो सका — कृपया एड्रेस बार से लिंक कॉपी करें');
+    }
+    ta.remove();
+  }
+
+  document.querySelectorAll('[data-copy-link]').forEach((btn) =>
+    btn.addEventListener('click', copyLink)
+  );
+
+  const wa = document.getElementById('wa-share');
+  if (wa) {
+    wa.href = 'https://wa.me/?text=' + encodeURIComponent(shareText + location.href.split('#')[0]);
+  }
+
+  const native = document.getElementById('native-share');
+  if (native && navigator.share) {
+    native.hidden = false;
+    native.addEventListener('click', () => {
+      navigator.share({
+        title: 'Khushboo ♥ Lakhan — Wedding Invitation',
+        text: shareText,
+        url: location.href.split('#')[0],
+      }).catch(() => {});
+    });
+  }
+})();
+
+/* ---- RSVP via WhatsApp ---- */
+(function rsvp() {
+  const form = document.getElementById('rsvp-form');
+  if (!form) return;
+  const RSVP_NUMBER = '919340325278'; // वधू-पक्ष contact from the invitation card
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const nameEl = document.getElementById('rsvp-name');
+    const phoneEl = document.getElementById('rsvp-phone');
+    const guests = document.getElementById('rsvp-guests').value;
+    const name = nameEl.value.trim();
+    const phone = phoneEl.value.replace(/[^\d+]/g, '');
+
+    nameEl.classList.toggle('invalid', !name);
+    phoneEl.classList.toggle('invalid', phone.replace(/\D/g, '').length < 10);
+    if (!name) { toast('कृपया अपना नाम लिखें'); nameEl.focus(); return; }
+    if (phone.replace(/\D/g, '').length < 10) { toast('कृपया सही फ़ोन नंबर लिखें'); phoneEl.focus(); return; }
+
+    const msg =
+      '🙏 RSVP — Khushboo ♥ Lakhan विवाह\n' +
+      `नाम: ${name}\n` +
+      `फ़ोन: ${phoneEl.value.trim()}\n` +
+      `सदस्य: ${guests}\n` +
+      'हम विवाह समारोह में सम्मिलित होंगे। 💐';
+    window.open('https://wa.me/' + RSVP_NUMBER + '?text=' + encodeURIComponent(msg), '_blank', 'noopener');
+    toast('💌 WhatsApp खुल रहा है — कृपया संदेश भेज दें');
+  });
+})();
+
 /* ---- Lightbox for card gallery ---- */
 (function lightbox() {
   const imgs = Array.from(document.querySelectorAll('.card-grid img'));
