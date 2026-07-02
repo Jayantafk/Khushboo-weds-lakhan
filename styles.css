@@ -311,7 +311,19 @@ body::before {
 .gold-divider::after { background: linear-gradient(90deg, var(--gold), transparent); }
 
 /* ============ Invitation ============ */
-.invitation { text-align: center; }
+.invitation { text-align: center; position: relative; overflow: hidden; }
+.invitation::before {
+  content: "";
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(680px, 92vw);
+  aspect-ratio: 1;
+  background: url("assets/elements/mandala.png") center / contain no-repeat;
+  opacity: .06;
+  pointer-events: none;
+  z-index: 0;
+}
 .jai {
   color: var(--green);
   letter-spacing: .12em;
@@ -344,16 +356,6 @@ body::before {
   box-shadow: 0 10px 30px rgba(154,120,48,.15);
   position: relative;
 }
-.person-card::before {
-  content: "❁";
-  position: absolute;
-  top: -14px; left: 50%;
-  transform: translateX(-50%);
-  background: var(--ivory);
-  color: var(--gold);
-  padding: 0 .6rem;
-  font-size: 1.2rem;
-}
 .person-label {
   font-family: var(--hindi-display);
   color: var(--gold-dark);
@@ -368,7 +370,8 @@ body::before {
   margin-bottom: .8rem;
 }
 .lineage { font-size: .95rem; color: var(--ink); }
-.lineage.dim, .dim { color: #7d6f58; font-size: .88rem; }
+.lineage.dim { color: var(--ink); font-size: .95rem; }
+.dim { color: #7d6f58; font-size: .88rem; }
 
 .knot { display: flex; align-items: center; }
 .knot-ring { color: var(--gold); font-size: 2rem; animation: pulse 3s ease-in-out infinite; }
