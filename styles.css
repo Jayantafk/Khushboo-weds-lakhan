@@ -70,7 +70,8 @@ body::before {
   text-align: center;
   padding: 4rem 1rem 5rem;
   background:
-    radial-gradient(ellipse 80% 60% at 50% 30%, rgba(227,201,127,.22), transparent 75%),
+    radial-gradient(ellipse 80% 60% at 50% 30%, rgba(255,251,238,.55), rgba(251,245,230,.25) 75%),
+    url('assets/hero-bg.jpg') center / cover no-repeat,
     var(--ivory);
 }
 .hero-inner { position: relative; z-index: 2; max-width: 780px; }
@@ -349,14 +350,23 @@ body::before {
   max-width: 880px;
 }
 .event-panel:nth-of-type(odd) .event-art { order: 2; }
-.event-art svg {
+.event-art {
+  margin: 0;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1.5px solid var(--gold-light);
+  box-shadow: 0 14px 40px rgba(154,120,48,.25);
+  background: var(--ivory-deep);
+}
+.event-art img {
   width: 100%;
   height: auto;
   display: block;
-  border-radius: 16px;
-  border: 1.5px solid var(--gold-light);
-  box-shadow: 0 14px 40px rgba(154,120,48,.22);
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  transition: transform .6s ease;
 }
+.event-panel:hover .event-art img { transform: scale(1.035); }
 .event-info { text-align: center; }
 .event-info h4 {
   font-family: var(--hindi-display);
