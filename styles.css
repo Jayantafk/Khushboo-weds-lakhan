@@ -471,16 +471,26 @@ body::before {
   box-shadow: 0 16px 44px rgba(198,150,30,.28);
   overflow: hidden;
 }
-/* draped curtains sit ABOVE the mandap so the drapes overlap it */
+/* draped curtains sit ABOVE the mandap so the drapes overlap it,
+   pushed a little further out to the sides and gently swaying */
 .haldi-curtain {
   position: absolute;
-  inset: 0;
-  width: 100%;
+  top: 0;
+  left: -6%;
+  right: -6%;
+  width: 112%;
   height: 100%;
   object-fit: fill;
   pointer-events: none;
   z-index: 2;
+  transform-origin: 50% 0;
+  animation: curtainSway 6s ease-in-out infinite;
 }
+@keyframes curtainSway {
+  0%, 100% { transform: translateX(-5px) skewX(-0.6deg); }
+  50%      { transform: translateX(5px) skewX(0.6deg); }
+}
+@media (prefers-reduced-motion: reduce) { .haldi-curtain { animation: none; } }
 /* banner + text stay on top and readable */
 .haldi-top {
   position: relative;
@@ -509,9 +519,41 @@ body::before {
   position: relative;
   z-index: 1;
   margin: 1.4rem 0 0;
-  width: min(620px, 108%);
+  width: min(520px, 84%);
 }
 .haldi-scene img { display: block; width: 100%; height: auto; }
+
+/* full-bleed wrapper so marigold latkans can hang in the side gutters */
+.haldi-wrap {
+  position: relative;
+  width: 100vw;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.haldi-latkans {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: clamp(80px, 12vw, 165px);
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.haldi-latkans.left  { left: 0; }
+.haldi-latkans.right { right: 0; }
+.haldi-latkans .latkan-svg { width: 100%; height: 100%; display: block; }
+.latkan-strand {
+  transform-box: fill-box;
+  transform-origin: 50% 0;
+  animation: latkanSway 5s ease-in-out infinite;
+}
+@keyframes latkanSway {
+  0%, 100% { transform: rotate(-2.4deg); }
+  50%      { transform: rotate(2.4deg); }
+}
+@media (prefers-reduced-motion: reduce) { .latkan-strand { animation: none; } }
+/* no room for side latkans on narrower screens */
+@media (max-width: 1100px) { .haldi-latkans { display: none; } }
 
 /* ============ Venue ============ */
 .venue { text-align: center; }

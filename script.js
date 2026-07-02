@@ -60,6 +60,56 @@
   }
 })();
 
+/* ---- Haldi: swaying marigold latkan strands in the side gutters ---- */
+(function buildHaldiLatkans() {
+  const hosts = document.querySelectorAll('.haldi-latkans');
+  if (!hosts.length) return;
+  const NS = 'http://www.w3.org/2000/svg';
+  const W = 160, H = 620, strands = 3;
+
+  hosts.forEach((host, hi) => {
+    const svg = document.createElementNS(NS, 'svg');
+    svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+    svg.setAttribute('preserveAspectRatio', 'xMidYMin slice');
+    svg.setAttribute('class', 'latkan-svg');
+    svg.innerHTML =
+      '<defs><g id="mflower">' +
+      '<circle r="9.5" fill="#E2830A"/><circle r="7" fill="#F5A623"/>' +
+      '<circle r="4.2" fill="#FFD24A"/><circle r="1.6" fill="#C56A05"/>' +
+      '</g></defs>';
+
+    for (let s = 0; s < strands; s++) {
+      const x = 30 + s * ((W - 60) / (strands - 1));
+      const len = H - (s % 2 ? 96 : 30);
+
+      const pos = document.createElementNS(NS, 'g');
+      pos.setAttribute('transform', `translate(${x},0)`);
+
+      const strand = document.createElementNS(NS, 'g');
+      strand.setAttribute('class', 'latkan-strand');
+      strand.style.animationDelay = (-(s + hi) * 0.7) + 's';
+      strand.style.animationDuration = (4.6 + s * 0.5) + 's';
+
+      const line = document.createElementNS(NS, 'line');
+      line.setAttribute('x1', 0); line.setAttribute('y1', 0);
+      line.setAttribute('x2', 0); line.setAttribute('y2', len);
+      line.setAttribute('stroke', '#5B8A3C');
+      line.setAttribute('stroke-width', '1.5');
+      strand.appendChild(line);
+
+      for (let y = 12; y <= len; y += 30) {
+        const u = document.createElementNS(NS, 'use');
+        u.setAttribute('href', '#mflower');
+        u.setAttribute('y', y);
+        strand.appendChild(u);
+      }
+      pos.appendChild(strand);
+      svg.appendChild(pos);
+    }
+    host.appendChild(svg);
+  });
+})();
+
 /* ---- Countdown to the pheras: 22 July 2026, 10:00 IST ---- */
 (function countdown() {
   const target = new Date('2026-07-22T10:00:00+05:30').getTime();
