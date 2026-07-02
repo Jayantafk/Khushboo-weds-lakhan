@@ -95,7 +95,7 @@ body::before {
   transform: translate(-50%, -50%);
   z-index: 0;
   pointer-events: none;
-  opacity: .16;
+  opacity: .22;
 }
 .mandala-bg img { width: 100%; display: block; animation: spin 60s linear infinite; }
 @keyframes spin { to { transform: rotate(360deg); } }
@@ -196,8 +196,6 @@ body::before {
   align-items: center;
   line-height: 1.02;
 }
-.couple-names .name:first-of-type { transform: translateX(-0.9em); }
-.couple-names .name:last-of-type  { transform: translateX(0.7em); }
 .couple-names .amp {
   font-family: var(--script-en);
   color: var(--gold-dark);
@@ -205,7 +203,6 @@ body::before {
   font-size: 1.15em;
   line-height: 1;
   margin: .04em 0;
-  transform: translateX(1.9em);
 }
 
 .hero-date {
@@ -328,7 +325,7 @@ body::before {
   width: min(680px, 92vw);
   aspect-ratio: 1;
   background: url("assets/elements/mandala.png") center / contain no-repeat;
-  opacity: .06;
+  opacity: .15;
   pointer-events: none;
   z-index: 0;
 }
@@ -844,7 +841,7 @@ body::before {
   .hero { min-height: 100vh; padding-top: 8rem; }
   .hero-figure { display: none; }
   .toran-top { width: 132%; }
-  .mandala-bg { width: 100vw; opacity: .12; }
+  .mandala-bg { width: 100vw; opacity: .18; }
   .monogram { padding: 1rem 1.5rem; }
   .cd-box { min-width: 68px; padding: .6rem .4rem; }
   .cd-box span { font-size: 1.5rem; }
