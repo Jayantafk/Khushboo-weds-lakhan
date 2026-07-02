@@ -464,6 +464,58 @@ body::before {
 .cal-cta { text-align: center; margin-top: 2.5rem; }
 .cal-cta .btn-gold { font-size: .95rem; }
 
+/* ---- Haldi feature stage (built from extracted design elements) ---- */
+.haldi-stage {
+  position: relative;
+  margin: 0 auto 3.5rem;
+  max-width: 880px;
+  padding: 2.4rem clamp(2.5rem, 9vw, 6rem) 2.6rem;
+  border-radius: 20px;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 0%, #FFE9A8 0%, transparent 70%),
+    linear-gradient(170deg, #FFF6D6 0%, #FBE39B 55%, #F6D477 100%);
+  box-shadow: 0 16px 44px rgba(198,150,30,.28);
+  overflow: hidden;
+}
+/* draped curtains frame the whole stage */
+.haldi-curtain {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  pointer-events: none;
+  z-index: 2;
+}
+.haldi-frame {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.haldi-banner img {
+  display: block;
+  width: clamp(180px, 42%, 300px);
+  height: auto;
+  margin: 0 auto .3rem;
+  filter: drop-shadow(0 6px 14px rgba(140,90,10,.3));
+}
+.haldi-scene {
+  margin: .2rem 0 1.2rem;
+  width: min(560px, 100%);
+}
+.haldi-scene img { display: block; width: 100%; height: auto; }
+.haldi-info h4 {
+  font-family: var(--hindi-display);
+  font-weight: 400;
+  color: var(--maroon);
+  font-size: clamp(1.5rem, 3.4vw, 2rem);
+  margin-bottom: .5rem;
+}
+.haldi-info .event-desc { max-width: 440px; color: #5c4a2a; }
+
 /* ============ Venue ============ */
 .venue { text-align: center; }
 .venue-name { font-family: var(--serif-en); font-size: clamp(1.4rem, 3.5vw, 1.9rem); color: var(--green); font-weight: 600; }
