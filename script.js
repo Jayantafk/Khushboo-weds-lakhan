@@ -65,7 +65,7 @@
   const hosts = document.querySelectorAll('.haldi-latkans');
   if (!hosts.length) return;
   const NS = 'http://www.w3.org/2000/svg';
-  const W = 160, H = 620, strands = 3;
+  const W = 160, H = 1000, strands = 3;
 
   hosts.forEach((host, hi) => {
     const svg = document.createElementNS(NS, 'svg');
@@ -80,7 +80,8 @@
 
     for (let s = 0; s < strands; s++) {
       const x = 30 + s * ((W - 60) / (strands - 1));
-      const len = H - (s % 2 ? 96 : 30);
+      // every strand runs the full height so none stops partway
+      const len = H;
 
       const pos = document.createElementNS(NS, 'g');
       pos.setAttribute('transform', `translate(${x},0)`);
