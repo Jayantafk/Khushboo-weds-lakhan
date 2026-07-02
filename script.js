@@ -1,22 +1,62 @@
 /* ===== Khushboo ♥ Lakhan — interactions ===== */
 
-/* ---- Garland: build marigold strand ---- */
-(function buildGarland() {
-  const strand = document.getElementById('strand');
-  if (!strand) return;
+/* ---- Hero: build swaying hanging marigold strands ---- */
+(function buildHeroGarland() {
+  const host = document.getElementById('heroStrands');
+  if (!host) return;
   const NS = 'http://www.w3.org/2000/svg';
-  for (let x = 12; x <= 1200; x += 34) {
-    const dip = 6 * Math.sin((x / 1200) * Math.PI * 6); // gentle waves
-    const use = document.createElementNS(NS, 'use');
-    use.setAttribute('href', '#marigold');
-    use.setAttribute('x', x);
-    use.setAttribute('y', 18 + dip);
-    strand.appendChild(use);
-    const leaf = document.createElementNS(NS, 'use');
-    leaf.setAttribute('href', '#leaf');
-    leaf.setAttribute('x', x + 17);
-    leaf.setAttribute('y', 14 + dip);
-    strand.appendChild(leaf);
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const step = 52;
+
+  for (let i = 0, x = 26; x <= 1200; x += step, i++) {
+    // gentle swag: strands dip lower toward the centre of each arch span
+    const wave = Math.sin((x / 1200) * Math.PI * 5);
+    const len = 96 + Math.round((wave + 1) * 46); // 96–188px
+
+    const g = document.createElementNS(NS, 'g');
+    g.setAttribute('class', 'h-strand');
+    g.setAttribute('transform', `translate(${x},0)`);
+    if (!reduce) {
+      g.style.animationDelay = (-(i % 7) * 0.55) + 's';
+      g.style.animationDuration = (4.4 + (i % 5) * 0.35) + 's';
+    }
+
+    // string
+    const line = document.createElementNS(NS, 'path');
+    line.setAttribute('d', `M0,-8 L0,${len}`);
+    line.setAttribute('stroke', '#4F7C3A');
+    line.setAttribute('stroke-width', '1.4');
+    g.appendChild(line);
+
+    // marigolds down the string
+    for (let y = 6; y < len - 18; y += 17) {
+      const m = document.createElementNS(NS, 'use');
+      m.setAttribute('href', '#marigold');
+      m.setAttribute('y', y);
+      g.appendChild(m);
+      if (y % 34 < 17) {
+        const lf = document.createElementNS(NS, 'use');
+        lf.setAttribute('href', '#hleaf');
+        lf.setAttribute('x', (i % 2 ? 7 : -7));
+        lf.setAttribute('y', y - 4);
+        if (i % 2) lf.setAttribute('transform', 'scale(-1,1)');
+        g.appendChild(lf);
+      }
+    }
+    // pearl bead tail + tassel marigold
+    for (let k = 0; k < 3; k++) {
+      const p = document.createElementNS(NS, 'use');
+      p.setAttribute('href', '#pearl');
+      p.setAttribute('y', len - 14 + k * 6);
+      g.appendChild(p);
+    }
+    const tip = document.createElementNS(NS, 'use');
+    tip.setAttribute('href', '#marigold');
+    tip.setAttribute('y', len + 6);
+    tip.setAttribute('transform', 'scale(.8)');
+    g.appendChild(tip);
+
+    host.appendChild(g);
   }
 })();
 
