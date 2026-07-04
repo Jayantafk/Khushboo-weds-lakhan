@@ -1,5 +1,25 @@
 /* ===== Khushboo ♥ Lakhan — interactions ===== */
 
+/* ---- Inline SVGs marked with data-inline-svg (so inner parts can animate) ---- */
+(function inlineSvgs() {
+  document.querySelectorAll('[data-inline-svg]').forEach((host) => {
+    fetch(host.getAttribute('data-inline-svg'))
+      .then((r) => r.text())
+      .then((markup) => {
+        host.innerHTML = markup;
+        const svg = host.querySelector('svg');
+        if (svg) {
+          svg.removeAttribute('width');
+          svg.removeAttribute('height');
+          svg.style.display = 'block';
+          svg.style.width = '100%';
+          svg.style.height = 'auto';
+        }
+      })
+      .catch(() => {});
+  });
+})();
+
 /* ---- Hero: build swaying hanging marigold strands ---- */
 (function buildHeroGarland() {
   const host = document.getElementById('heroStrands');
