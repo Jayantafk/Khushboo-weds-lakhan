@@ -537,6 +537,22 @@ body::before {
   margin: 0;
 }
 
+.events-art { display: block; width: 100%; max-width: 480px; height: auto; margin: 0 auto; }
+/* Events shown as slices of the one design SVG, with the fixed Haldi tile
+   spliced in place of the old (broken) Haldi. One Events.svg, cropped via
+   background-position; the corrected Haldi is a separate optimized SVG. */
+.ev-slice {
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+  background-image: url("assets/figma/Events.svg");
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+}
+.ev-slice.top  { aspect-ratio: 390 / 118;  background-position: 0 0; }
+.ev-slice.rest { aspect-ratio: 390 / 1896; background-position: 0 100%; }
+.ev-day-art { display: block; width: 55%; max-width: 220px; height: auto; margin: .6rem auto 1rem; }
+.events-art.haldi-fix { margin-top: 2px; margin-bottom: 6px; }
 .cal-cta { text-align: center; margin-top: 2.5rem; }
 .cal-cta .btn-gold { font-size: .95rem; }
 
