@@ -269,7 +269,7 @@ function toast(msg) {
 
 /* ---- Share: copy link / WhatsApp / native ---- */
 (function share() {
-  const shareText = '💍 Khushboo ♥ Lakhan — शुभ विवाह\n21–22 July 2026 · Jnanakshi Convention Hall, Hassan\nनिमंत्रण देखें: ';
+  const shareText = '💍 Khushboo ♥ Lakhan — Wedding\n21–22 July 2026 · Jnanakshi Convention Hall, Hassan\nSee Invitation: ';
 
   function copyLink() {
     const url = location.href.split('#')[0];
@@ -334,17 +334,17 @@ function toast(msg) {
 
     nameEl.classList.toggle('invalid', !name);
     phoneEl.classList.toggle('invalid', phone.replace(/\D/g, '').length < 10);
-    if (!name) { toast('कृपया अपना नाम लिखें'); nameEl.focus(); return; }
-    if (phone.replace(/\D/g, '').length < 10) { toast('कृपया सही फ़ोन नंबर लिखें'); phoneEl.focus(); return; }
+    if (!name) { toast('Please enter your name'); nameEl.focus(); return; }
+    if (phone.replace(/\D/g, '').length < 10) { toast('Please enter a valid phone number'); phoneEl.focus(); return; }
 
     const msg =
-      '🙏 RSVP — Khushboo ♥ Lakhan विवाह\n' +
-      `नाम: ${name}\n` +
-      `फ़ोन: ${phoneEl.value.trim()}\n` +
-      `सदस्य: ${guests}\n` +
-      'हम विवाह समारोह में सम्मिलित होंगे। 💐';
+      '🙏 RSVP — Khushboo ♥ Lakhan Wedding\n' +
+      `Name: ${name}\n` +
+      `Phone: ${phoneEl.value.trim()}\n` +
+      `Guests: ${guests}\n` +
+      'We will be attending the wedding. 💐';
     window.open('https://wa.me/' + RSVP_NUMBER + '?text=' + encodeURIComponent(msg), '_blank', 'noopener');
-    toast('💌 WhatsApp खुल रहा है — कृपया संदेश भेज दें');
+    toast('💌 Opening WhatsApp — please send the message');
   });
 })();
 
