@@ -356,21 +356,6 @@ body::before {
 }
 .invitation-art { display: block; width: 100%; height: auto; }
 .invitation-art svg { display: block; width: 100%; height: auto; }
-/* the ribbon knot draws taut between the two cards when scrolled into view */
-.knot-tie { transform-box: fill-box; transform-origin: 50% 50%; }
-.invitation .reveal .knot-tie { opacity: 0; transform: scaleX(.06); }
-.invitation .reveal.visible .knot-tie {
-  animation: knotTie 1.15s cubic-bezier(.34,.9,.3,1.12) .7s both;
-}
-@keyframes knotTie {
-  0%   { opacity: 0; transform: scaleX(.06); }
-  55%  { opacity: 1; }
-  100% { opacity: 1; transform: scaleX(1); }
-}
-@media (prefers-reduced-motion: reduce) {
-  .invitation .reveal .knot-tie,
-  .invitation .reveal.visible .knot-tie { opacity: 1; transform: none; animation: none; }
-}
 /* gentle continuous float */
 @keyframes invFloat { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
 /* entrance: rise + fade when scrolled into view */
@@ -385,13 +370,23 @@ body::before {
   background: linear-gradient(115deg, transparent 32%, rgba(255,255,255,.5) 48%, rgba(255,246,220,.35) 54%, transparent 68%);
   transform: translateX(-130%);
   pointer-events: none;
+  z-index: 2;
 }
 .invitation .reveal.visible .invitation-card::after { animation: invShine 1.6s ease-out .55s 1; }
 @keyframes invShine { to { transform: translateX(130%); } }
+/* ribbon knot (behind the cards) wipes in on first scroll: red wipes right
+   (reveals left→right), white wipes left (reveals right→left) */
+.knot-red   { clip-path: inset(0 100% 0 0) fill-box; }
+.knot-white { clip-path: inset(0 0 0 100%) fill-box; }
+.invitation .reveal.visible .knot-red  { clip-path: inset(0 0 0 0) fill-box; animation: wipeRight 1s cubic-bezier(.4,.1,.2,1) .55s both; }
+.invitation .reveal.visible .knot-white { clip-path: inset(0 0 0 0) fill-box; animation: wipeLeft  1s cubic-bezier(.4,.1,.2,1) .55s both; }
+@keyframes wipeRight { from { clip-path: inset(0 100% 0 0) fill-box; } to { clip-path: inset(0 0 0 0) fill-box; } }
+@keyframes wipeLeft  { from { clip-path: inset(0 0 0 100%) fill-box; } to { clip-path: inset(0 0 0 0) fill-box; } }
 @media (prefers-reduced-motion: reduce) {
   .invitation-card, .invitation .reveal.visible .invitation-card { animation: none; }
   .invitation .reveal .invitation-card { opacity: 1; transform: none; }
   .invitation-card::after { display: none; }
+  .knot-red, .knot-white { clip-path: none; animation: none; }
 }
 .jai {
   color: var(--green);
