@@ -875,6 +875,36 @@ body::before {
 .footer .section-title { color: var(--gold-light); }
 .footer .gold-divider::before, .footer .gold-divider::after { background: linear-gradient(90deg, transparent, var(--gold-light)); }
 .footer .gold-divider::after { background: linear-gradient(90deg, var(--gold-light), transparent); }
+/* Share block on the maroon panel (matches Figma "Share & Contact") */
+.footer .share-title {
+  font-family: var(--serif-en);
+  color: var(--gold-light);
+  font-size: 1.15rem;
+  letter-spacing: .04em;
+  margin-bottom: 1rem;
+}
+.footer .share-row { margin-bottom: 2.6rem; }
+.footer .contact-title { margin-top: .5rem; }
+.btn-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .45rem;
+  padding: .62rem 1.5rem;
+  border-radius: 30px;
+  background: #fff;
+  color: var(--maroon);
+  border: 2px solid var(--gold);
+  font-family: var(--serif-en);
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: .02em;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: 0 6px 16px rgba(0,0,0,.22);
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.btn-pill:hover { transform: translateY(-2px); box-shadow: 0 10px 22px rgba(0,0,0,.28); }
 .contact-row {
   display: flex;
   justify-content: center;
