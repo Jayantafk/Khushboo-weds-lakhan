@@ -318,13 +318,17 @@ function toast(msg) {
   }
 })();
 
-/* ---- RSVP via WhatsApp ---- */
+/* ---- RSVP -> Google Sheet (Apps Script Web App) ---- */
 (function rsvp() {
   const form = document.getElementById('rsvp-form');
   if (!form) return;
-  const RSVP_NUMBER = '919340325278'; // वधू-पक्ष contact from the invitation card
 
-  form.addEventListener('submit', (e) => {
+  // Paste the Web App URL from your Apps Script deployment (ends with /exec).
+  const RSVP_ENDPOINT = 'https://script.google.com/macros/s/AKfycbyViwnaQDsSkr0lyRaLYuRH_RUfyiqlqnDseypLkhnMdRvloWDQ5AeFA8c2YpuSHF7W2w/exec';
+
+  const btn = form.querySelector('.rsvp-submit');
+
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
     const nameEl = document.getElementById('rsvp-name');
     const phoneEl = document.getElementById('rsvp-phone');
@@ -337,14 +341,35 @@ function toast(msg) {
     if (!name) { toast('Please enter your name'); nameEl.focus(); return; }
     if (phone.replace(/\D/g, '').length < 10) { toast('Please enter a valid phone number'); phoneEl.focus(); return; }
 
-    const msg =
-      '🙏 RSVP — Khushboo ♥ Lakhan Wedding\n' +
-      `Name: ${name}\n` +
-      `Phone: ${phoneEl.value.trim()}\n` +
-      `Guests: ${guests}\n` +
-      'We will be attending the wedding. 💐';
-    window.open('https://wa.me/' + RSVP_NUMBER + '?text=' + encodeURIComponent(msg), '_blank', 'noopener');
-    toast('💌 Opening WhatsApp — please send the message');
+    if (!RSVP_ENDPOINT || RSVP_ENDPOINT.indexOf('PASTE_') === 0) {
+      toast('RSVP is not connected yet — please try again later');
+      return;
+    }
+
+    const original = btn ? btn.textContent : '';
+    if (btn) { btn.disabled = true; btn.textContent = 'Sending…'; }
+
+    try {
+      // Apps Script Web Apps don't send CORS headers, so we POST no-cors
+      // (the row is still written; we optimistically confirm success).
+      await fetch(RSVP_ENDPOINT, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
+        body: new URLSearchParams({
+          name,
+          phone: phoneEl.value.trim(),
+          guests,
+          page: location.href.split('#')[0]
+        })
+      });
+      form.reset();
+      toast('💐 Thank you! Your RSVP has been received');
+    } catch (err) {
+      toast('Could not send — please check your connection and try again');
+    } finally {
+      if (btn) { btn.disabled = false; btn.textContent = original; }
+    }
   });
 })();
 
