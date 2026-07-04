@@ -1,4 +1,9 @@
 <svg width="361" height="291" viewBox="0 0 361 291" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<style>/*anim-injected*/
+.curtain{transform-box:view-box;transform-origin:181px 16px;animation:curtsway 5s ease-in-out infinite;}
+@keyframes curtsway{0%,100%{transform:skewX(-2.6deg);}50%{transform:skewX(2.6deg);}}
+</style>
+
 <g filter="url(#filter0_d_40_6409)">
 <g clip-path="url(#paint0_diamond_40_6409_clip_path)" data-figma-skip-parse="true"><g transform="matrix(-0.081 0.2355 -0.303339 -0.104333 180.5 135.5)"><rect x="0" y="0" width="673.39" height="590.481" fill="url(#paint0_diamond_40_6409)" opacity="1" shape-rendering="crispEdges"/><rect x="0" y="0" width="673.39" height="590.481" transform="scale(1 -1)" fill="url(#paint0_diamond_40_6409)" opacity="1" shape-rendering="crispEdges"/><rect x="0" y="0" width="673.39" height="590.481" transform="scale(-1 1)" fill="url(#paint0_diamond_40_6409)" opacity="1" shape-rendering="crispEdges"/><rect x="0" y="0" width="673.39" height="590.481" transform="scale(-1)" fill="url(#paint0_diamond_40_6409)" opacity="1" shape-rendering="crispEdges"/></g></g><rect x="24" y="14" width="313" height="243" rx="14" data-figma-gradient-fill="{&#34;type&#34;:&#34;GRADIENT_DIAMOND&#34;,&#34;stops&#34;:[{&#34;color&#34;:{&#34;r&#34;:1.0,&#34;g&#34;:0.89999997615814209,&#34;b&#34;:0.55000001192092896,&#34;a&#34;:1.0},&#34;position&#34;:0.0},{&#34;color&#34;:{&#34;r&#34;:1.0,&#34;g&#34;:0.95300000905990601,&#34;b&#34;:0.83899998664855957,&#34;a&#34;:1.0},&#34;position&#34;:1.0}],&#34;stopsVar&#34;:[{&#34;color&#34;:{&#34;r&#34;:1.0,&#34;g&#34;:0.89999997615814209,&#34;b&#34;:0.55000001192092896,&#34;a&#34;:1.0},&#34;position&#34;:0.0},{&#34;color&#34;:{&#34;r&#34;:1.0,&#34;g&#34;:0.95300000905990601,&#34;b&#34;:0.83899998664855957,&#34;a&#34;:1.0},&#34;position&#34;:1.0}],&#34;transform&#34;:{&#34;m00&#34;:-162.00001525878906,&#34;m01&#34;:-606.67901611328125,&#34;m02&#34;:564.83953857421875,&#34;m10&#34;:471.00003051757812,&#34;m11&#34;:-208.66668701171875,&#34;m12&#34;:4.3333101272583008},&#34;opacity&#34;:1.0,&#34;blendMode&#34;:&#34;NORMAL&#34;,&#34;visible&#34;:true}"/>
 <rect x="24.75" y="14.75" width="311.5" height="241.5" rx="13.25" stroke="#E3C97F" stroke-width="1.5"/>
@@ -1245,7 +1250,7 @@
 <mask id="mask69_40_6409" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="36" y="15" width="290" height="242">
 <rect x="36" y="15" width="290" height="241.371" fill="url(#pattern0_40_6409)"/>
 </mask>
-<g mask="url(#mask69_40_6409)">
+<g class="curtain" mask="url(#mask69_40_6409)">
 <rect x="36" y="15" width="290" height="241.371" fill="url(#pattern1_40_6409)"/>
 </g>
 <mask id="mask70_40_6409" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="110" y="152" width="142" height="105">

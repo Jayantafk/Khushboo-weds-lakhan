@@ -537,23 +537,13 @@ body::before {
   margin: 0;
 }
 
-.events-art { display: block; width: 100%; max-width: 480px; height: auto; margin: 0 auto; }
-/* Events shown as slices of the one design SVG, with the fixed Haldi tile
-   spliced in place of the old (broken) Haldi. One Events.svg, cropped via
-   background-position; the corrected Haldi is a separate optimized SVG. */
-.ev-slice {
-  width: 100%;
-  max-width: 480px;
-  margin: 0 auto;
-  background-image: url("assets/figma/Events.svg");
-  background-repeat: no-repeat;
-  background-size: 100% auto;
-}
-.ev-slice.top  { aspect-ratio: 390 / 118;  background-position: 0 0; }
-.ev-slice.rest { aspect-ratio: 390 / 1875; background-position: 0 100%; }
-.ev-day-art { display: block; width: 55%; max-width: 220px; height: auto; margin: .6rem auto 1rem; }
-/* match the Haldi tile width to the other cards (which have side margins baked in) */
-.events-art.haldi-fix { width: 93%; max-width: 446px; margin: 2px auto 6px; }
+/* Modular event tiles — each its own element so each animates in on scroll */
+.events-art.tile { display: block; width: 93%; max-width: 446px; height: auto; margin: 0 auto 1.8rem; }
+.ev-day-art { display: block; width: 55%; max-width: 220px; height: auto; margin: 1.6rem auto 1rem; }
+.ev-caption { display: block; width: 52%; max-width: 210px; height: auto; margin: -0.4rem auto 1rem; }
+.ev-day { text-align: center; margin: 1.6rem 0 1rem; line-height: 1.15; }
+.ev-day .ev-date { display: block; font-family: var(--serif-en); font-weight: 700; color: var(--green); font-size: clamp(1.7rem, 5.5vw, 2.3rem); }
+.ev-day .ev-dow  { display: block; font-family: var(--serif-en); font-weight: 700; color: var(--green); font-size: clamp(1.4rem, 4.5vw, 1.9rem); }
 .cal-cta { text-align: center; margin-top: 2.5rem; }
 .cal-cta .btn-gold { font-size: .95rem; }
 
