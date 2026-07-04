@@ -56,7 +56,9 @@ body::before {
   position: relative;
   width: 100%;
   max-width: 480px;
-  margin: 0 auto;
+  /* trim the art's ~8.8% empty top; proportional on mobile, capped so
+     larger phones/tablets don't clip the toran (hero clips the overflow) */
+  margin: calc(min(15vw, 72px) * -1) auto 0;
 }
 .hero-art {
   display: block;
@@ -976,16 +978,17 @@ body::before {
    seamlessly full-width — colour only, no artwork. */
 @media (min-width: 900px) {
   /* Larger, "zoomed" hero art on desktop (560px wide -> ~1123px tall) */
-  .hero-artwrap { max-width: 560px; }
-  /* Gutter fade matches the art's edge colours over its 1123px height */
+  /* Pull up to trim the art's ~99px of empty top space (hero clips it) */
+  .hero-artwrap { max-width: 560px; margin-top: -82px; }
+  /* Gutter fade matches the art's edge colours, shifted up by the same 82px */
   .hero {
     background: linear-gradient(180deg,
       #FEF7E4 0px,
-      #FEF6DF 168px,
-      #FDF2D4 393px,
-      #FBEDC6 674px,
-      #F7E4B0 954px,
-      #F4DFA2 1112px);
+      #FEF6DF 86px,
+      #FDF2D4 311px,
+      #FBEDC6 592px,
+      #F7E4B0 872px,
+      #F4DFA2 1030px);
     background-repeat: no-repeat;
   }
 

@@ -334,12 +334,14 @@ function toast(msg) {
     const phoneEl = document.getElementById('rsvp-phone');
     const guests = document.getElementById('rsvp-guests').value;
     const name = nameEl.value.trim();
-    const phone = phoneEl.value.replace(/[^\d+]/g, '');
+    const digits = phoneEl.value.replace(/\D/g, '');
+    // Indian mobile numbers -> exactly 10 digits, no country code
+    const phoneValid = digits.length === 10;
 
     nameEl.classList.toggle('invalid', !name);
-    phoneEl.classList.toggle('invalid', phone.replace(/\D/g, '').length < 10);
+    phoneEl.classList.toggle('invalid', !phoneValid);
     if (!name) { toast('Please enter your name'); nameEl.focus(); return; }
-    if (phone.replace(/\D/g, '').length < 10) { toast('Please enter a valid phone number'); phoneEl.focus(); return; }
+    if (!phoneValid) { toast('Please enter a valid 10-digit phone number'); phoneEl.focus(); return; }
 
     if (!RSVP_ENDPOINT || RSVP_ENDPOINT.indexOf('PASTE_') === 0) {
       toast('RSVP is not connected yet — please try again later');
