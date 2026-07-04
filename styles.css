@@ -1,7 +1,7 @@
 /* ============ Khushboo ♥ Lakhan — Luxury Wedding Invitation ============ */
 
 :root {
-  --ivory: #FCF4E2;
+  --ivory: #FBF2DA;
   --ivory-deep: #F4E6C6;
   --gold: #C9A24B;
   --gold-light: #E3C97F;
@@ -48,16 +48,43 @@ body::before {
 /* ============ Hero ============ */
 .hero {
   position: relative;
-  min-height: 100vh;
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
   text-align: center;
-  padding: clamp(240px, 34vh, 380px) 1rem 5rem;
   overflow: hidden;
-  background:
-    linear-gradient(180deg, transparent 78%, var(--ivory) 100%),
-    radial-gradient(ellipse 95% 80% at 50% 40%, #FFF8E6 0%, #FCEFCB 48%, #F4DFA2 100%);
+  background: #FFF8E7; /* matches the Figma hero art's cream so side gutters blend */
+}
+.hero-artwrap {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+}
+.hero-art {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.hero-monogram {
+  position: absolute;
+  left: 50%;
+  top: 46%;
+  transform: translateX(-50%);
+  width: 37%;
+  height: auto;
+  z-index: 2;
+  pointer-events: none;
+  animation: monoShine 3.8s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) { .hero-monogram { animation: none; } }
+.hero-below {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.4rem;
+  padding: 1.6rem 1rem 3rem;
+  /* picks up the art's gold base, then eases into the page */
+  background: linear-gradient(180deg, #F4DFA2 0%, #F6E4AE 45%, var(--ivory) 100%);
 }
 .hero-inner { position: relative; z-index: 3; max-width: 760px; }
 .hero-inner::before {
@@ -316,18 +343,15 @@ body::before {
 .gold-divider::after { background: linear-gradient(90deg, var(--gold), transparent); }
 
 /* ============ Invitation ============ */
-.invitation { text-align: center; position: relative; overflow: hidden; }
-.invitation::before {
-  content: "";
-  position: absolute;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
-  width: min(680px, 92vw);
-  aspect-ratio: 1;
-  background: url("assets/elements/mandala.png") center / contain no-repeat;
-  opacity: .15;
-  pointer-events: none;
-  z-index: 0;
+.invitation { text-align: center; position: relative; }
+.invitation-art {
+  display: block;
+  width: 100%;
+  max-width: 460px;
+  height: auto;
+  margin: 0 auto;
+  border-radius: 16px;
+  box-shadow: 0 14px 44px rgba(154,120,48,.18);
 }
 .jai {
   color: var(--green);
@@ -375,7 +399,7 @@ body::before {
   margin-bottom: .8rem;
 }
 .lineage { font-size: .95rem; color: var(--ink); }
-.lineage.dim { color: var(--ink); font-size: .95rem; }
+.lineage.dim { color: var(--ink); font-size: .87rem; }
 .dim { color: #7d6f58; font-size: .88rem; }
 
 .knot { display: flex; align-items: center; }
@@ -398,19 +422,19 @@ body::before {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 74px; height: 74px;
+  width: 88px; height: 88px;
   border-radius: 50%;
   background: radial-gradient(circle at 35% 30%, var(--gold-light), var(--gold-dark));
   color: #fff;
   font-family: var(--serif-en);
   font-weight: 700;
-  font-size: 1.7rem;
+  font-size: 2rem;
   line-height: 1;
   box-shadow: 0 8px 20px rgba(154,120,48,.35);
   border: 2px solid #fff3d6;
 }
-.day-badge small { font-size: .58rem; font-weight: 500; letter-spacing: .05em; margin-top: .15rem; }
-.day-header h3 { font-family: var(--hindi-display); color: var(--green); font-size: 1.3rem; font-weight: 400; }
+.day-badge small { font-size: .66rem; font-weight: 500; letter-spacing: .05em; margin-top: .15rem; }
+.day-header h3 { font-family: var(--hindi-display); color: var(--green); font-size: 1.65rem; font-weight: 400; }
 
 /* Illustrated event panels */
 .event-panel {
@@ -422,6 +446,33 @@ body::before {
   max-width: 880px;
 }
 .event-panel:nth-of-type(odd) .event-art { order: 2; }
+
+/* self-contained square event tile (image carries its own name + timing) */
+.event-tile {
+  max-width: 880px;
+  width: 100vw;
+  margin: 0 auto 3.5rem;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.event-tile .event-art {
+  margin: 0;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1.5px solid var(--gold-light);
+  box-shadow: 0 14px 40px rgba(154,120,48,.25);
+}
+.event-tile .event-art img {
+  width: 100%;
+  height: auto;
+  display: block;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}
+/* portrait variant keeps the full design (no square crop) */
+.event-tile.portrait { max-width: 500px; }
+.event-tile.portrait .event-art img { aspect-ratio: auto; object-fit: contain; }
 .event-art {
   margin: 0;
   border-radius: 16px;

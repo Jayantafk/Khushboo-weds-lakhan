@@ -18,40 +18,16 @@
 
 <!-- ===== Hero ===== -->
 <header class="hero" id="home">
-  <img class="toran-top" src="assets/elements/toran.png" alt="" aria-hidden="true" />
-  <div class="mandala-bg" aria-hidden="true"><img src="assets/elements/mandala.png" alt="" /></div>
-  <img class="hero-figure fig-left" src="assets/elements/figure.png" alt="" aria-hidden="true" />
-  <img class="hero-figure fig-right" src="assets/elements/figure.png" alt="" aria-hidden="true" />
-  <div class="hero-inner reveal">
-    <div class="ganesh-logo" aria-hidden="true">
-      <img src="assets/elements/ganesh.png" alt="॥ श्री गणेशाय नमः ॥" />
-    </div>
-
-    <p class="subh-vivah">शुभ विवाह</p>
-
-    <div class="monogram-img" aria-hidden="true">
-      <img src="assets/elements/monogram.png" alt="K &amp; L monogram" />
-    </div>
-
-    <h1 class="couple-names">
-      <span class="name">Khushboo</span>
-      <span class="amp">&amp;</span>
-      <span class="name">Lakhan</span>
-    </h1>
-
-    <p class="hero-date">Tuesday–Wednesday · 21 &amp; 22 July 2026</p>
-    <p class="hero-venue">Jnanakshi Convention Hall · Hassan, Karnataka</p>
-
+  <div class="hero-artwrap">
+    <img class="hero-art" src="assets/figma/Hero.anim.svg" alt="Khushboo &amp; Lakhan — शुभ विवाह · 21 &amp; 22 July 2026 · Jnanakshi Convention Hall, Hassan, Karnataka" />
+    <img class="hero-monogram" src="assets/elements/monogram.png" alt="Khushboo &amp; Lakhan — K &amp; L monogram" />
+  </div>
+  <div class="hero-below">
     <div class="countdown" id="countdown" aria-label="Wedding countdown">
       <div class="cd-box"><span id="cd-days">--</span><small>Days</small></div>
       <div class="cd-box"><span id="cd-hours">--</span><small>Hours</small></div>
       <div class="cd-box"><span id="cd-mins">--</span><small>Minutes</small></div>
       <div class="cd-box"><span id="cd-secs">--</span><small>Seconds</small></div>
-    </div>
-
-    <div class="hero-actions">
-      <button class="btn-gold ghost" type="button" data-add-cal>📅 Add to Calendar</button>
-      <button class="btn-gold ghost" type="button" data-copy-link>🔗 Share Invitation</button>
     </div>
 
     <a href="#invitation" class="scroll-cue" aria-label="Scroll down">⌄</a>
@@ -62,32 +38,7 @@
 <!-- ===== Invitation ===== -->
 <section class="section invitation" id="invitation">
   <div class="container reveal">
-    <p class="jai">जय भिक्षु · जय महावीर · जय तुलसी</p>
-    <h2 class="section-title hindi">निमंत्रण</h2>
-    <div class="gold-divider" aria-hidden="true"><span>✦</span></div>
-    <p class="couplet">अर्पित है अति प्रेम सहित, श्रीमान निमंत्रण यह लेना।<br/>
-    आनंद भरे शुभ अवसर पर, परिवार सहित दर्शन देना॥</p>
-
-    <div class="couple-cards">
-      <article class="person-card reveal">
-        <p class="person-label">वधू</p>
-        <h3 class="person-name">सौ.कां. खुशबू</h3>
-        <p class="lineage dim">सुपौत्री स्व. तीजा देवी – स्व. सोहनलाल जी बैद</p>
-        <p class="lineage">सुपुत्री श्रीमती दुर्गा देवी – श्री कमल जी बैद</p>
-      </article>
-      <div class="knot" aria-hidden="true">
-        <span class="knot-ring">❁</span>
-      </div>
-      <article class="person-card reveal">
-        <p class="person-label">वर</p>
-        <h3 class="person-name">चि. लखन</h3>
-        <p class="lineage dim">सुपौत्र स्व. संपथ देवी – स्व. मोहनलाल जी सिपाणी</p>
-        <p class="lineage">सुपुत्र श्रीमती मधू देवी – श्री राजकरण जी सिपाणी</p>
-      </article>
-    </div>
-
-    <p class="invite-line">के <strong>“मांगलिक परिणयोत्सव”</strong> की मांगलिक बेला में उपस्थित होकर<br/>
-    वर-वधू को अपने स्नेहशील आशीर्वाद से अनुग्रहित करें।</p>
+    <img class="invitation-art" src="assets/figma/Invitation.svg" alt="निमंत्रण — जय भिक्षु · जय महावीर · जय तुलसी। सौ.कां. खुशबू एवं चि. लखन" />
   </div>
 </section>
 
@@ -122,24 +73,16 @@
       </div>
     </div>
 
-    <div class="event-panel reveal">
-      <figure class="event-art">
-        <img src="assets/events/mayra.jpg" alt="मायरे की भेंट — रेशमी वस्त्र, लड्डुओं का थाल, पोटली और उपहार" loading="lazy" />
+    <div class="event-tile">
+      <figure class="event-art reveal">
+        <img src="assets/events/battisi-mayra.png" alt="बत्तीसी एवं मायरा — सुबह 10:00 बजे से" loading="lazy" />
       </figure>
-      <div class="event-info">
-        <h4>बत्तीसी &amp; मायरा</h4>
-        <p class="event-chip">सुबह 10:00 बजे से</p>
-      </div>
     </div>
 
-    <div class="event-panel reveal">
-      <figure class="event-art">
-        <img src="assets/events/reception.jpg" alt="Reception मंच — पुष्प-वलय, मखमली सोफ़ा और झिलमिलाती रोशनी" loading="lazy" />
+    <div class="event-tile portrait">
+      <figure class="event-art reveal">
+        <img src="assets/events/reception.png" alt="Reception — दोपहर 12:05 बजे से" loading="lazy" />
       </figure>
-      <div class="event-info">
-        <h4>Reception</h4>
-        <p class="event-chip">दोपहर 12:05 बजे से</p>
-      </div>
     </div>
 
     <div class="event-panel reveal">

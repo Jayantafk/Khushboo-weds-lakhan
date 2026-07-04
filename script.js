@@ -242,7 +242,7 @@ function toast(msg) {
       a.click();
       a.remove();
       setTimeout(() => URL.revokeObjectURL(url), 4000);
-      toast('📅 कैलेंडर फ़ाइल डाउनलोड हुई — खोलकर सभी कार्यक्रम जोड़ें');
+      toast('📅 Calendar file downloaded — open it to add all events');
     });
   });
 })();
@@ -255,7 +255,7 @@ function toast(msg) {
     const url = location.href.split('#')[0];
     if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard.writeText(url).then(
-        () => toast('🔗 Link copied! · लिंक कॉपी हो गया'),
+        () => toast('🔗 Link copied!'),
         () => fallbackCopy(url)
       );
     } else {
@@ -269,9 +269,9 @@ function toast(msg) {
     ta.select();
     try {
       document.execCommand('copy');
-      toast('🔗 Link copied! · लिंक कॉपी हो गया');
+      toast('🔗 Link copied!');
     } catch (e) {
-      toast('कॉपी नहीं हो सका — कृपया एड्रेस बार से लिंक कॉपी करें');
+      toast('Could not copy — please copy the link from the address bar');
     }
     ta.remove();
   }
