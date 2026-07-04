@@ -349,9 +349,12 @@ body::before {
   width: 100%;
   max-width: 460px;
   margin: 0 auto;
-  border-radius: 16px;
+  padding: 12px;
+  border-radius: 18px;
   overflow: hidden;
-  box-shadow: 0 14px 44px rgba(154,120,48,.18);
+  background: #FFFCF3;
+  border: 1px solid rgba(201,162,75,.28);
+  box-shadow: 0 16px 46px rgba(154,120,48,.22);
   animation: invFloat 6s ease-in-out infinite;
 }
 .invitation-art { display: block; width: 100%; height: auto; }
@@ -374,19 +377,10 @@ body::before {
 }
 .invitation .reveal.visible .invitation-card::after { animation: invShine 1.6s ease-out .55s 1; }
 @keyframes invShine { to { transform: translateX(130%); } }
-/* ribbon knot (behind the cards) wipes in on first scroll: red wipes right
-   (reveals left→right), white wipes left (reveals right→left) */
-.knot-red   { clip-path: inset(0 100% 0 0) fill-box; }
-.knot-white { clip-path: inset(0 0 0 100%) fill-box; }
-.invitation .reveal.visible .knot-red  { clip-path: inset(0 0 0 0) fill-box; animation: wipeRight 1s cubic-bezier(.4,.1,.2,1) .55s both; }
-.invitation .reveal.visible .knot-white { clip-path: inset(0 0 0 0) fill-box; animation: wipeLeft  1s cubic-bezier(.4,.1,.2,1) .55s both; }
-@keyframes wipeRight { from { clip-path: inset(0 100% 0 0) fill-box; } to { clip-path: inset(0 0 0 0) fill-box; } }
-@keyframes wipeLeft  { from { clip-path: inset(0 0 0 100%) fill-box; } to { clip-path: inset(0 0 0 0) fill-box; } }
 @media (prefers-reduced-motion: reduce) {
   .invitation-card, .invitation .reveal.visible .invitation-card { animation: none; }
   .invitation .reveal .invitation-card { opacity: 1; transform: none; }
   .invitation-card::after { display: none; }
-  .knot-red, .knot-white { clip-path: none; animation: none; }
 }
 .jai {
   color: var(--green);
